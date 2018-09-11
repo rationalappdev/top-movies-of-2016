@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {
   ListView,       // Renders a list
-  RefreshControl  // Refreshes the list on pull down
+  RefreshControl,  // Refreshes the list on pull down
+  StatusBar
 } from 'react-native';
 import Row from './Row';
+import Movie from './Movie';
 
 const demoData = [
   {
@@ -96,6 +98,7 @@ export default class List extends Component {
    * Call _fetchData after component has been mounted
    */
   componentDidMount() {
+    StatusBar.setHidden(true);
     // Fetch Data
     this._fetchData();
   }
@@ -125,8 +128,7 @@ export default class List extends Component {
         // Pass a function to handle row presses
         onPress={()=>{
           // Navigate to a separate movie detail screen
-          this.props.navigator.push({
-            name: 'movie',
+          this.props.navigation.navigate('Movie',{
             movie: movie,
           });
         }}

@@ -4,7 +4,8 @@ import {
   StyleSheet,         // CSS-like styles
   Text,               // Renders text
   TouchableOpacity,   // Handles row presses
-  View                // Container component
+  View,                // Container component
+  ImageBackground
 } from 'react-native';
 import Dimensions from 'Dimensions';
 
@@ -28,7 +29,7 @@ export default class Row extends Component {
         activeOpacity={0.7}
       >
         {/* Background image */}
-        <Image source={{uri: image}} style={styles.imageBackground}>
+        <ImageBackground source={{uri: image}} style={styles.imageBackground}>
           {/* Title */}
           <Text style={[styles.text, styles.title]}>{title.toUpperCase()}</Text>
           {/* Rating */}
@@ -41,7 +42,7 @@ export default class Row extends Component {
             {/* Value */}
             <Text style={[styles.text, styles.value]}>{rating}%</Text>
           </View>
-        </Image>
+        </ImageBackground>
       </TouchableOpacity>
     );
   }
@@ -51,7 +52,8 @@ export default class Row extends Component {
 const styles = StyleSheet.create({
   // Row
   row: {
-    paddingBottom: 4,                   // Add padding at the bottom
+    paddingBottom: 25,                   // Add padding at the bottom
+    marginTop:-20
   },
   // Background image
   imageBackground: {

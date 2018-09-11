@@ -5,19 +5,21 @@ import {
   StyleSheet,         // CSS-like styles
   Text,               // Renders text
   TouchableOpacity,   // Handles button presses
-  View                // Container component
+  View,
+  ImageBackground                // Container component
 } from 'react-native';
 
 export default class Movie extends Component {
 
   // Extract movie object passed as a prop from Row component
-  render({ movie } = this.props) {
+  render({ navigation } = this.props) {
+    const movie = navigation.getParam('movie', {});
     // Extract values from movie object
     const { title, rating, large, plot } = movie;
     return (
       <View style={styles.container}>
         {/* Background image with large image */}
-        <Image source={{uri: large}} style={styles.imageBackground}>
+        <ImageBackground source={{uri: large}} style={styles.imageBackground}>
           {/* Use ScrollView in case plot is too large to fit on the screen */}
           <ScrollView
             style={{flex: 1}}
@@ -44,7 +46,7 @@ export default class Movie extends Component {
             {/* Press handler */}
             <TouchableOpacity
               // Go to the previous screen
-              onPress={() => {this.props.navigator.pop();}}
+              onPress={() => {this.props.navigation.pop();}}
               // Dim button a little bit when pressed
               activeOpacity={0.7}
               // Pass button style
@@ -53,7 +55,7 @@ export default class Movie extends Component {
               <Text style={styles.buttonText}>CLOSE</Text>
             </TouchableOpacity>
           </View>
-        </Image>
+        </ImageBackground>
       </View>
     );
   }
